@@ -1,0 +1,42 @@
+@use "mixins/mixins.scss" as *;
+
+@include b(tree) {
+  display: inline-block;
+  width: 100%;
+}
+
+@include b(tree-node) {
+  padding: 5px 0px;
+  cursor: pointer;
+  color: #606266;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  &:hover {
+    background-color: #f5f7fa;
+  }
+  @include e(expand-icon) {
+    display: inline-flex;
+    align-items: center;
+    transform: rotate(0deg);
+    transition: 0.2s;
+    &.expanded {
+      transform: rotate(90deg);
+    }
+    &.is-leaf {
+      fill: transparent;
+      cursor: default;
+      display: none;
+    }
+  }
+  @include e(text) {
+    padding-left: 5px;
+  }
+  @include when(selected) {
+    background-color: rgba(24, 160, 88, 0.1);
+  }
+  @include when(disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
