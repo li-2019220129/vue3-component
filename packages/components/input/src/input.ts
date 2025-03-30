@@ -2,7 +2,7 @@ import { PropType, ExtractPropTypes } from "vue";
 
 export const inputProps = {
   type: {
-    type: String as PropType<string>,
+    type: String,
   },
   modelValue: {
     type: String,
@@ -21,16 +21,24 @@ export const inputProps = {
     default: false,
   },
   placeholder: {
-    type: String as PropType<string>,
+    type: String,
+    default: "",
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+  maxlength: {
+    type: String,
     default: "",
   },
 };
 
-
 export const inputEmits = {
-  focus:(e:FocusEvent)=> typeof e,
-  blur:(e:FocusEvent)=> typeof e,
-  input:(value:string)=> typeof value,
-}
+  focus: (e: FocusEvent) => typeof e,
+  blur: (e: FocusEvent) => typeof e,
+  input: (value: string) => typeof value,
+  change: (value: string) => typeof value,
+};
 
 export type InputProps = ExtractPropTypes<typeof inputProps>;

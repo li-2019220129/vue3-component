@@ -6,9 +6,10 @@ import tree from "@lzy/components/tree/index";
 import checkout from "@lzy/components/checkbox/index";
 import button from "@lzy/components/button/index";
 import input from "@lzy/components/input/index";
+import { FormItem, Form } from "@lzy/components/form/index";
 import "@lzy/theme-chalk/src/index.scss";
 
-const plugin = [icon, tree, checkout, button, input];
+const plugin = [icon, tree, checkout, button, input, FormItem, Form];
 
 const app = createApp(App);
 plugin.forEach((plugin) => {

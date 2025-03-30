@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Key, TreeNode, TreeOptions } from "@lzy/components/tree";
 import { GameController } from "@vicons/ionicons5";
-import { ref } from "vue";
+import { Values } from "async-validator";
+import { ref, reactive } from "vue";
+import type { FormInstance } from "@lzy/components/form";
 const createData = (level: number = 4, parentKey: string = ""): any[] => {
   if (!level) return [];
   let arr = new Array(5 - level).fill(0);
@@ -80,15 +82,23 @@ const handleButtonClick = (e: any) => {
 const handleFocus = (e: FocusEvent) => {
   console.log(e);
 };
-
 const handleBlur = (e: FocusEvent) => {
   console.log(e);
 };
-
 const handleInput = (value: string) => {
   console.log(value, "input");
 };
-const inputValue = ref("1212");
+const state = reactive({
+  name: "",
+  password: "",
+});
+const formRef = ref<FormInstance>();
+
+const handleSubmit = () => {
+  formRef.value!.validate((validate, errors) => {
+    console.log(validate, errors);
+  });
+};
 </script>
 <template>
   <lzy-tree
@@ -120,16 +130,61 @@ const inputValue = ref("1212");
     121212
   </lzy-button>
   <div style="margin-top: 10px">
-    <lzy-input
-      v-model="inputValue"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @input="handleInput"
-      clearable
-      disabled
-      placeholder="请输入内容"
+    <lzy-form
+      ref="formRef"
+      :model="state"
+      :rules="{
+        name: [
+          {
+            required: true,
+            message: '请输入用户名',
+            trigger: ['blur'],
+          },
+        ],
+      }"
     >
-    </lzy-input>
+      <lzy-form-item
+        label="用户名"
+        prop="name"
+        :rules="[
+          {
+            min: 6,
+            max: 10,
+            message: '用户名至少6到10位',
+            trigger: ['blur', 'change'],
+          },
+        ]"
+      >
+        <lzy-input
+          v-model="state.name"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @input="handleInput"
+          maxlength="10"
+          placeholder="请输入内容"
+        >
+        </lzy-input>
+      </lzy-form-item>
+      <lzy-form-item
+        label="密码"
+        prop="password"
+        :rules="[
+          {
+            required: true,
+            message: '请输入密码',
+            trigger: ['blur'],
+          },
+        ]"
+      >
+        <lzy-input
+          show-password
+          v-model="state.password"
+          placeholder="请输入内容"
+        >
+        </lzy-input>
+      </lzy-form-item>
+    </lzy-form>
+    <lzy-button @click="handleSubmit">提交</lzy-button>
   </div>
 </template>
 

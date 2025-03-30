@@ -40,6 +40,7 @@
       box-shadow: 0 0 0 1px #409eff inset;
     }
   }
+
   @include e(inner) {
     width: 100%;
     flex-grow: 1;
@@ -73,5 +74,24 @@
       justify-content: center;
       cursor: pointer;
     }
+  }
+  @include e(icon) {
+    align-items: center;
+    display: flex;
+    height: inherit;
+    justify-content: center;
+    line-height: inherit;
+    margin-left: 6px;
+    transition: all 0.3s;
+  }
+  @include e(clear) {
+    color: #a8abb2;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  @include e(password) {
+    color: #a8abb2;
+    cursor: pointer;
+    font-size: 14px;
   }
 }

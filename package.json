@@ -16,6 +16,7 @@
     "@lzy/components": "workspace:^",
     "@lzy/theme-chalk": "workspace:^",
     "@lzy/utils": "workspace:^",
+    "async-validator": "^4.2.5",
     "dayjs": "^1.11.13",
     "typescript": "^5.6.2",
     "vue": "^3.5.10"
